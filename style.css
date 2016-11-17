@@ -1,0 +1,480 @@
+<style>
+*{
+  box-sizing: border-box;
+  font-family: ;
+}
+
+.backbuttonspace{
+  border: 0pt;
+  border-style: solid;
+  border-color: black;
+  height: 6vh;
+  background-color: #e67e22;
+  padding-left: 5pt;
+  padding-top: 5pt;
+}
+
+.button{
+  cursor:pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.centered_text{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.grid{
+  text-align: center;
+  padding-top: 10pt;
+  border:0pt;
+  height: 94vh;
+  width: 100%;
+  background-color: #e67e22;#ccc;
+  vertical-align: middle;
+}
+
+.griditem{
+  display: inline-block;
+  *display: inline;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 13pt;
+  color: white;
+  height:45%;
+  width: 25%;
+  margin:1%;
+  background-color: #d35400;
+  /*background-color: #ddd;*/
+  border-radius: 10pt;
+  border-style: solid;
+  border-color: black;
+  border-width: 0pt;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.griditem:hover{
+  background-color:#C73F05;
+  color: white;
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+}
+.griditem_disabled{
+  display: inline-block;
+  *display: inline;
+  vertical-align: middle;
+  text-align: center;
+  height:47%;
+  width: 25%;
+  margin:1%;
+  background-color: #ddd;
+  border-radius: 10pt;
+  border-style: solid;
+  border-color: black;
+  border-width: 0pt;
+  opacity: 0;
+}
+.item_picture{
+  height: 50%;
+  width: 100%;
+  border-radius: 5pt;
+  float:left;
+}
+
+.overlay{
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 75%; //same as section
+  font-size:110%;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+body, html{
+  margin:0pt;
+  padding:0pt;
+  font-family: Tahoma, Geneva, sans-serif;
+  background-color: #e67e22;
+}
+header {
+  background-color:black;
+  color:white;
+  text-align:center;
+  padding:0pt;
+}
+aside {
+  margin-top:0pt;
+  padding:0pt;
+  background-color: #DA6C20;
+  height:100vh;
+  width:25%;
+  float:right;
+}
+section {
+  border: 0;
+  margin:0pt;
+  padding:0;
+  width: 75%;
+  height: 100vh;
+  float:left;
+  background-color: #e67e22;
+
+}
+
+a{
+  color: #000;
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: none;
+  color: black;
+}
+
+#lugar{
+  cursor: default;
+  z-index: 3;
+  height:5vh;
+  width:10%;
+  background-color: #2969B0;
+  text-align: center;
+  font-size: 12pt;
+  color: white;
+  display: inline-block;
+  position: fixed;
+  top:0;
+  right:30%;
+  border-bottom-left-radius: 5pt;
+  border-bottom-right-radius: 5pt;
+}
+/*Itens do pedido a adicionar à lista*/
+#pedido_controlo{
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0, 0.8);
+  z-index: 99;
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+#pedido_controlo_nome{
+  font-weight: bold;
+}
+#pedido_controlo_janela{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 5pt;
+  vertical-align: middle;
+  text-align: center;
+  height:47%;
+  width: 25%;
+  margin: auto;
+  background-color: #ddd;
+  border-radius: 10pt;
+  border-style: solid;
+  border-color: black;
+  border-width: 0pt;
+}
+#pedido_controlo_mudar{
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0, 0.8);
+  z-index: 98;
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+#pedido_controlo_mudar_nome{
+  font-weight: bold;
+}
+#pedido_controlo_mudar_janela{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10pt;
+  vertical-align: middle;
+  text-align: center;
+
+  width: 25%;
+  margin: auto;
+  background-color: #DA6C20;
+  color: white;
+  border-radius: 10pt;
+  border-style: solid;
+  border-color: black;
+  border-width: 0pt;
+}
+.ajuda{
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0, 0.8);
+  z-index: 99;
+  overflow-y: hidden;
+  transition: 0.5s;
+  color: white;
+}
+.ajuda_nome{
+  font-weight: bold;
+  text-align: center;
+}
+.ajuda_janela{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 15pt;
+  vertical-align: middle;
+  max-height: 70%;
+  overflow-y: scroll;
+  margin: auto;
+  background-color: #DA6C20;#ddd;
+  border-radius: 10pt;
+  border-style: solid;
+  border-color: black;
+  border-width: 0pt;
+}
+
+#confirmar_remover{
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 99;
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+#confirmar_remover_janela{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10pt;
+  vertical-align: middle;
+  text-align: center;
+  width: 25%;
+  margin: auto;
+  background-color: #DA6C20;
+  color: white;
+  border-radius: 10pt;
+  border-style: solid;
+  border-color: black;
+  border-width: 0pt;
+}
+/*Itens da lista do pedido*/
+#pedido_lista{
+  border: 0;
+  padding: 0;
+  margin: 0;
+  height: 50%;
+  overflow-y: auto;
+}
+#pedido_header{
+  border: 0;
+  height: 10%;
+  background-color: #2969B0;
+  color: white;
+  font-size: 12pt;
+  text-align: center;
+  top: 0;
+  cursor: default;
+  border-bottom-left-radius: 5pt;
+}
+#pedido_tabela{
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  /*height: 45%;*/
+  /*overflow-y: auto;*/
+}
+#tabela_pedido thead{
+  cursor: default;
+  border-bottom: 1px solid #fff;
+}
+#tabela_pedido_tbody tr{
+  cursor: pointer;
+}
+#tabela_pedido_tbody td{
+  border: none;
+}
+#tabela_pedido_tbody tr:hover{
+  background-color: #CF5819;
+}
+.outros_pedidos_header{
+  border: 0;
+  height: 10%;
+  background-color: #2969B0;
+  color: white;
+  text-align: center;
+  top: 0;
+  cursor: default;
+  display: none;
+  border-bottom-left-radius: 5pt;
+  border-top-left-radius: 5pt;
+}
+
+.outros_pedidos_tabela{
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: none;
+  color: white;
+}
+.outros_pedidos_tabela thead, tr{
+  cursor: default;
+}
+.outros_pedidos_tabela td{
+  border-bottom: 0px solid #ddd;
+}
+/*#pedido_historico_header{
+  border: 0;
+  height: 10%;
+  background-color: #bbb;
+  text-align: center;
+  top: 0;
+  cursor: default;
+  display: none;
+}
+#pedido_historico_tabela{
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: none;
+  /*height: 45%;*/
+  /*overflow-y: auto;
+}
+#tabela_pedido_historico thead, tr{
+  cursor: default;
+}*/
+
+#pedido_total{
+  margin: 0;
+  padding-left: 5pt;
+  border: 0;
+  height: 5%;
+  width: 50%;
+  float: left;
+  background-color: #2969B0;
+  color: white;
+  font-size: 12pt;
+  vertical-align:middle;
+  cursor: default;
+  border-bottom-left-radius: 5pt;
+  border-top-left-radius: 5pt;
+}
+#pedido_total_preco{
+  font-size: 12pt;
+  margin: 0;
+  padding-right: 5pt;
+  border: 0;
+  height: 5%;
+  width: 50%;
+  float: right;
+  text-align: right;
+  background-color: #2969B0;
+  color: white;
+  vertical-align:middle;
+  cursor: default;
+}
+/**/
+#pagamento{
+  height: 45%;
+  width:100%;
+  float: left;
+  bottom:0;
+  border: 0;
+  border-top-style: solid;
+  border-color: white;
+  margin: 0;
+  padding: 5pt;
+  background-color: white;
+}
+
+
+/*Estilo do menu principal*/
+
+#start_screen {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  background: #000;
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+#start_screen a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #e67e22;
+  display: block;
+  transition: 0.3s;
+}
+
+#start_screen a:hover, #start_screen a:focus {
+  color: white;
+}
+
+#start_screen_button {
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 60px !important;
+}
+
+@media screen and (max-height: 450px) {
+  #start_screen {overflow-y: auto;}
+  #start_screen a {font-size: 20px}
+  #start_screen_button {
+    font-size: 40px !important;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+/*Menu de pagamento*/
+.confirmar{
+  height: 0%;
+  width: 25%;
+  margin: 0;
+  border: 0;
+  padding: 5pt;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  right: 0;
+  overflow-y: hidden;
+  transition: 0.5s;
+  background-color: #DA6C20;
+}
+
+#mudar_contribuinte{
+  display:none;
+}
+</style>

@@ -1,0 +1,998 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>barISTa</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="template.js"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+
+  </head>
+
+  <body>
+    <div id="main">
+
+      <!-- Ecrã de iniciar -->
+
+      <div id="start_screen" onclick="closeNav('start_screen')">
+        <a id="start_screen_button" href="javascript:void(0)">Toque para começar</a>
+      </div>
+
+      <!-- Painel lateral -->
+      <aside>
+        <!-- *Pedido* -->
+        <div id="pedido_lista">
+          <div id="pedido_header">
+            <div class="centered_text">
+              Novo Pedido
+            </div>
+          </div>
+          <div id="pedido_tabela" class="container-fluid">
+            <table id="tabela_pedido" class="table table-hover" style="width: 100%; border: 0; color: white;">
+              <thead>
+                <td>Qtd</td>
+                <td>Nome</td>
+                <td>Preço (€)</td>
+                <td></td>
+              </thead>
+              <tbody id="tabela_pedido_tbody"></tbody>
+            </table>
+          </div>
+          <!-- Histórico/Pedidos anteriores -->
+          <div id="pedido_historico_header" class="outros_pedidos_header">
+            <div class="centered_text">
+              Conta
+            </div>
+          </div>
+          <div id="pedido_historico_tabela" class="container-fluid outros_pedidos_tabela">
+            <table id="tabela_pedido_historico" class="table  " style="width: 100%; border: 0; color: white;">
+              <thead>
+                <td>Qtd</td>
+                <td>Nome</td>
+                <td>Preço (€)</td>
+              </thead>
+              <tbody id="tabela_pedido_historico_tbody"></tbody>
+            </table>
+          </div>
+          <!--Os outros pedidos vão aqui-->
+          <!-- Mesa 2 -->
+          <div id="pedido_2_header" class="outros_pedidos_header">
+            <div class="centered_text">
+              Lugar 2
+            </div>
+          </div>
+          <div id="pedido_2_tabela" class="container-fluid outros_pedidos_tabela">
+            <table id="tabela_2_historico" class="table  " style="width: 100%; border: 0;">
+              <thead>
+                <td>Qtd</td>
+                <td>Nome</td>
+                <td>Preço (€)</td>
+              </thead>
+              <tbody id="tabela_pedido_2_tbody">
+                <tr>
+                  <td>5</td>
+                  <td>Coca Cola</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Sandes Mista</td>
+                  <td>1.50</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Mesa 3 -->
+          <div id="pedido_3_header" class="outros_pedidos_header">
+            <div class="centered_text">
+              Lugar 3
+            </div>
+          </div>
+          <div id="pedido_3_tabela" class="container-fluid outros_pedidos_tabela">
+            <table id="tabela_3_historico" class="table  " style="width: 100%; border: 0;">
+              <thead>
+                <td>Qtd</td>
+                <td>Nome</td>
+                <td>Preço (€)</td>
+              </thead>
+              <tbody id="tabela_pedido_3_tbody">
+                <tr>
+                  <td>1</td>
+                  <td>Café</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Pastel de Nata</td>
+                  <td>0.80</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Mesa 4 -->
+          <div id="pedido_4_header" class="outros_pedidos_header">
+            <div class="centered_text">
+              Lugar 4
+            </div>
+          </div>
+          <div id="pedido_4_tabela" class="container-fluid outros_pedidos_tabela">
+            <table id="tabela_4_historico" class="table  " style="width: 100%; border: 0;">
+              <thead>
+                <td>Qtd</td>
+                <td>Nome</td>
+                <td>Preço (€)</td>
+              </thead>
+              <tbody id="tabela_pedido_4_tbody">
+                <tr>
+                  <td>1</td>
+                  <td>Guinness XL</td>
+                  <td>2.25</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="pedido_total">
+          <div class="centered_text">
+            Total
+          </div>
+        </div>
+        <div id="pedido_total_preco">
+          <div class="centered_text">
+            <span id="preco_total_valor">0€</span>
+          </div>
+        </div>
+
+        <!-- Secção *pagamento* -->
+
+
+        <div id="pagamento" style="background-color:#DA6C20; color:white;">
+          <div id="pagamento_principal">
+            <button type="button" onclick="openPass('confirmar_envio')" class="btn btn-success btn-block" href="#confirmar_envio">Enviar Pedido</button>
+            <button type="button" onclick="openPass('confirmar_limpar')" class="btn btn-warning btn-block">Limpar Pedido</button>
+            <button type="button" onclick="openPass('confirmar_cancelar')" class="btn btn-danger btn-block">Cancelar e Sair</button>
+            <p></p><p></p><p></p>
+            <button type="button" onclick="openNav('ajuda_pedido')" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-question-sign"></span> Ajuda</button>
+          </div>
+          <div id="pagamento_principal_2" class="confirmar"> <!--Igual ao primeiro mas com pagamento-->
+            <button type="button" onclick="openPass('confirmar_envio')" class="btn btn-success btn-block">Enviar Novo Pedido</button>
+            <button type="button" onclick="openPass('confirmar_limpar')" class="btn btn-warning btn-block">Limpar Pedido</button>
+            <p></p>
+            <p></p>
+            <button type="button" onclick="openPass('pagamento_contribuinte_1')" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-euro"></span> Pagamento</button>
+            <p></p>
+            <button type="button" onclick="openNav('ajuda_pedido_2')" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-question-sign"></span> Ajuda</button>
+          </div>
+          <div id="confirmar_envio" class="confirmar">
+            <p>
+              Tem a certeza que pretende enviar o seu pedido? Não poderá alterá-lo depois de o enviar!
+            </p>
+            <div class="btn-group btn-group-justified">
+              <a type="button" class="btn btn-success" onclick="enviarPedido()">Sim</a>
+              <a type="button" class="btn btn-danger" onclick="closeNav('confirmar_envio')">Não</a>
+            </div>
+          </div>
+          <div id="confirmar_limpar" class="confirmar">
+            <p>
+              Tem a certeza que pretende limpar o seu pedido e começar de novo?
+            </p>
+            <div class="btn-group btn-group-justified">
+              <a type="button" class="btn btn-success" onclick="clearList()">Sim</a>
+              <a type="button" class="btn btn-danger" onclick="closeNav('confirmar_limpar')">Não</a>
+            </div>
+          </div>
+          <div id="confirmar_cancelar" class="confirmar">
+            <p>
+              Tem a certeza que pretende cancelar tudo e sair?
+            </p>
+            <div class="btn-group btn-group-justified">
+              <a type="button" class="btn btn-success" onclick="cancel()" href="#">Sim</a>
+              <a type="button" class="btn btn-danger" onclick="closeNav('confirmar_cancelar')">Não</a>
+            </div>
+          </div>
+          <div id="pedido_enviado" class="confirmar">
+            <p>
+              O seu pedido foi enviado e será atendido dentro de momentos.
+            </p>
+          </div>
+          <div id="pedido_atendido" class="confirmar">
+            <p>
+              O seu pedido está a ser atendido e será entregue dentro de alguns instantes.
+            </p>
+          </div>
+          <div id="pedido_vazio" class="confirmar">
+            <p>
+              Não pode enviar um pedido vazio! Adicione pelo menos um item ao pedido para poder enviar.
+            </p>
+            <a type="button" class="btn btn-block btn-danger" onclick="closeNav('pedido_vazio')">Voltar</a>
+          </div>
+          <div id="limpar_pedido_vazio" class="confirmar">
+            <p>
+              O pedido já está limpo!
+            </p>
+            <a type="button" class="btn btn-block btn-danger" onclick="closeNav('limpar_pedido_vazio')">Voltar</a>
+          </div>
+          <div id="pagamento_pedido_nao_vazio" class="confirmar">
+            <p>
+              Tem itens no pedido. Se pagar agora, terá de efetuar um pagamento adicional, depois de enviar o novo pedido. Deseja continuar?
+            </p>
+            <button type="button" onclick="continuarPagamento()" class="btn btn-success btn-block">Sim</button>
+            <button type="button" onclick="closeNav('pagamento_pedido_nao_vazio')" class="btn btn-danger btn-block">Não</button>
+          </div>
+          <div id="pagamento_contribuinte_1" class="confirmar">
+            <p>
+              Deseja fatura com contribuinte?
+            </p>
+            <button type="button" onclick="openPass('pagamento_contribuinte_2')" class="btn btn-success btn-block">Sim</button>
+            <button id="mudar_contribuinte" type="button" onclick="openPass('pagamento_contribuinte_3')" class="btn btn-success btn-block">Sim, mas usar um número diferente</button>
+            <button type="button" onclick="openPass('pagamento_quem')" class="btn btn-danger btn-block">Não</button>
+          </div>
+          <div id="pagamento_contribuinte_2" class="confirmar">
+            <p>
+              Introduza o seu número de contribuinte no teclado abaixo e em seguida carregue em OK.
+            </p>
+            <div id="teclado_contribuinte">
+              <p id="codigo_contribuinte" align="center"> </p>
+              <p align="center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(1)">1</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(2)">2</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(3)">3</button>
+              </p>
+
+              <p align="center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(4)">4</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(5)">5</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(6)">6</button>
+              </p>
+
+              <p align="center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(7)">7</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(8)">8</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(9)">9</button>
+              </p>
+
+              <p align="center">
+                <a type="button" class="btn btn-success" onclick="openPass('pagamento_contribuinte_confirmar')" style="width:25%;">OK</a>
+                <a type="button" class="btn btn-warning" onclick="correctContribuinte()" style="width:25%;">Corrigir</a>
+                <a type="button" class="btn btn-danger" onclick="closeNav('pagamento_contribuinte_2')" style="width:25%;">Cancelar</a></p>
+            </div>
+          </div>
+          <div id="pagamento_contribuinte_3" class="confirmar">
+            <p>
+              Introduza o novo número de contribuinte no teclado abaixo e em seguida carregue em OK.
+            </p>
+            <div id="teclado_contribuinte_2">
+              <p id="codigo_contribuinte_2" align="center"> </p>
+              <p align="center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(1)">1</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(2)">2</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(3)">3</button>
+              </p>
+
+              <p align="center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(4)">4</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(5)">5</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(6)">6</button>
+              </p>
+
+              <p align="center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(7)">7</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(8)">8</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="writeNumber(9)">9</button>
+              </p>
+
+              <p align="center">
+                <a type="button" class="btn btn-success" onclick="openPass('pagamento_contribuinte_confirmar')" style="width:25%;">OK</a>
+                <a type="button" class="btn btn-warning" onclick="correctContribuinte()" style="width:25%;">Corrigir</a>
+                <a type="button" class="btn btn-danger" onclick="closeNav('pagamento_contribuinte_3')" style="width:25%;">Cancelar</a></p>
+            </div>
+          </div>
+          <div id="pagamento_contribuinte_confirmar" class="confirmar">
+            <p>
+              Confirme o número de contribuinte inserido.
+            </p>
+            <p id="contribuinte_inserido" align="center"> </p>
+            <button type="button" onclick="openPass('pagamento_quem')" class="btn btn-success btn-block">Confirmar</button>
+            <button type="button" onclick="corrigirContribuinte()" class="btn btn-danger btn-block">Voltar</button>
+          </div>
+          <div id="pagamento_quem" class="confirmar">
+            <p>
+              Deseja pagar a conta de quais lugares da mesa?
+            </p>
+            <a type="button" class="btn btn-primary btn-block" onclick="openPass('pagamento_tipo')">Pagar a minha conta</a>
+            <a type="button" class="btn btn-primary btn-block" onclick="openPass('pagamento_tipo_dividir')">Dividir por todos</a>
+            <a type="button" class="btn btn-primary btn-block" onclick="openPass('pagamento_tipo_todos')">Pagar por todos</a>
+            <p></p>
+            <button type="button" onclick="openNav('ajuda_pagamento_2')" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-question-sign"></span> Ajuda</button>
+            <p></p>
+            <a type="button" class="btn btn-danger btn-block" onclick="closeNav('pagamento_quem')">Voltar</a>
+            <p></p>
+          </div>
+          <div id="pagamento_tipo" class="confirmar">
+            <p>
+              Escolha o método de pagamento.
+            </p>
+            <a type="button" class="btn btn-primary btn-block" onclick="openPass('pagamento_dinheiro')"><span class="glyphicon glyphicon-euro"></span> Dinheiro</a>
+            <a type="button" class="btn btn-primary btn-block" onclick="openPass('pagamento_cartao')"><span class="glyphicon glyphicon-credit-card"></span> Cartão multibanco</a>
+            <a type="button" class="btn btn-primary btn-block" onclick="openPass('pagamento_nfc')"><span class="glyphicon glyphicon-phone"></span> NFC</a>
+            <p></p>
+            <a type="button" class="btn btn-primary btn-block" onclick="openNav('ajuda_pagamento')"><span class="glyphicon glyphicon-question-sign"></span> Ajuda</a>
+            <p></p>
+            <a type="button" class="btn btn-danger btn-block" onclick="closeNav('pagamento_tipo')">Voltar</a>
+          </div>
+          <div id="pagamento_dinheiro" class="confirmar">
+            <p>
+              Introduza o montante necessário a pagar.
+            </p>
+            <p>
+              Montante a pagar: <span id="pagamento_restante">0€</span>
+            </p>
+            <a type="button" class="btn btn-success btn-block" onclick="paymoney()">*Simular Pagamento*</a>
+            <a type="button" class="btn btn-danger btn-block" onclick="closeNav('pagamento_dinheiro')">Cancelar</a>
+          </div>
+          <div id="pagamento_cartao" class="confirmar">
+            <p>
+              Introduza o cartão na mesa.
+            </p>
+            <div class="btn-group btn-group-justified">
+              <a type="button" class="btn btn-success" onclick="openPass('pagamento_cartao_2')">OK</a>
+              <a type="button" class="btn btn-danger btn-block" onclick="closeNav('pagamento_cartao')">Cancelar</a>
+            </div>
+          </div>
+          <div id="pagamento_cartao_2" class="confirmar">
+            <p>
+              O cartão está pronto para efetuar o pagamento. Insira o seu PIN e em seguida carregue em OK
+            </p>
+
+            <div id="teclado">
+              <p id="codigo" align="center"> </p>
+              <p align="center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="insertNumber(1)">1</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="insertNumber(2)">2</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="insertNumber(3)">3</button>
+              </p>
+
+              <p align="center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="insertNumber(4)">4</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="insertNumber(5)">5</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="insertNumber(6)">6</button>
+              </p>
+
+              <p align="center">
+                <button type="button" class="btn btn-primary btn-lg" onclick="insertNumber(7)">7</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="insertNumber(8)">8</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="insertNumber(9)">9</button>
+              </p>
+
+              <p align="center">
+                <a type="button" class="btn btn-success" onclick="checkPin()" style="width:25%;">OK</a>
+                <a type="button" class="btn btn-warning" onclick="correctPin()" style="width:25%;">Corrigir</a>
+                <a type="button" class="btn btn-danger" onclick="closeNav('pagamento_cartao_2')" style="width:25%;">Cancelar</a></p>
+            </div>
+
+          </div>
+          <div id="pagamento_nfc" class="confirmar">
+            <p>
+              Ponha o seu dispositivo NFC em cima do ecrã e confirme a transação no mesmo.
+            </p>
+            <a type="button" class="btn btn-success btn-block" onclick="openPass('pagamento_concluido')">*Simular Pagamento*</a>
+            <a type="button" class="btn btn-danger btn-block" onclick="closeNav('pagamento_nfc')">Cancelar</a>
+          </div>
+          <div id="pagamento_concluido" class="confirmar">
+            <p>
+              Pagamento concluído.
+            </p>
+          </div>
+          <div id="pagamento_falhado" class="confirmar">
+            <p>
+              Erro no código. Tente de novo.
+            </p>
+            <a type="button" class="btn btn-danger btn-block" onclick="closeNav('pagamento_falhado')">Voltar</a>
+          </div>
+          <div class="confirmar"></div>
+        </div>
+      </aside>
+
+      <!-- Secção principal -->
+      <section>
+        <div class="backbuttonspace">
+          <h2 style="position: relative; top:-15pt; text-align: center;">Menu Principal</h2>
+          <div id="lugar">
+            <div class="centered_text">
+              Lugar 1
+            </div>
+          </div>
+        </div>
+
+        <!-- Grelha de categorias -->
+        <div class="grid">
+          <a class="griditem button" href="#popupcafe">
+            <img src="images/cafe/cafe.jpg" class="item_picture">
+            <div class="centered_text" style="font-size:110%">
+              Café
+            </div>
+          </a>
+          <a class="griditem button" href="#popupcerveja">
+            <img src="images/cerveja/cerveja.jpg"  class="item_picture">
+            <div class="centered_text" style="font-size:110%">
+              Cerveja
+            </div>
+          </a>
+          <a class="griditem button" href="#popupcha">
+            <img src="images/cha/chavermelho.jpg" class="item_picture">
+            <div class="centered_text" style="font-size:110%">
+              Chás
+            </div>
+          </a>
+          <a class="griditem button menuitem" href="#popupsumo">
+            <img src="images/sumo/cocacola.jpg" class="item_picture">
+            <div class="centered_text" style="font-size:110%">
+              Sumos e Refrigerantes
+            </div>
+          </a>
+          <a class="griditem button menuitem" href="#popupsandes">
+            <img src="images/sandes/sandwiches.jpg" class="item_picture">
+            <div class="centered_text" style="font-size:110%">
+              Sandes e Torradas
+            </div>
+          </a>
+
+          <a class="griditem button menuitem" href="#popuppastel">
+            <img src="images/pastel/nata.jpg" class="item_picture">
+            <div class="centered_text" style="font-size:110%">
+              Pastelaria
+            </div>
+          </a>
+
+        </div>
+        <!-- Café overlay-->
+        <div id="popupcafe" class="overlay">
+          <div class="backbuttonspace">
+            <a class="btn btn-primary" href="#" style="position:fixed; z-index:2; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+              Voltar ao Menu Principal
+            </a>
+            <h2 style="position: relative; top:-15pt; text-align: center;">Café</h2>
+          </div>
+
+          <div class="grid">
+            <a class="griditem button menuitem" onclick="adicionarItem('Café', 1)">
+              <img src="images/cafe/cafe.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Café</p>
+                </div>
+                <div class="griditem_price">
+                  <p>
+                    1€
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Descafeinado', 1)">
+              <img src="images/cafe/cafe.jpg" class="item_picture" >
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Descafeinado</p>
+                </div>
+                <div class="griditem_price">
+                  <p>1€</p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Java', 2)">
+              <img src="images/cafe/java.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Java</p>
+                </div>
+                <div class="griditem_price">
+                  <p>2€</p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Nespresso', 3)">
+              <img src="images/cafe/nespresso.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Nespresso</p>
+                </div>
+                <div class="griditem_price">
+                  <p>3€</p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Starbucks', 6)">
+              <img src="images/cafe/starbucks.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Starbucks</p>
+                </div>
+                <div class="griditem_price">
+                  <p>6€</p>
+                </div>
+              </div>
+            </a>
+
+            <div class="griditem_disabled">
+            </div>
+          </div>
+        </div><!-- Fim da secção café-->
+
+        <!-- Secção cerveja -->
+        <div id="popupcerveja" class="overlay">
+          <div class="backbuttonspace">
+            <a class="btn btn-primary" href="#" style="position:fixed; z-index:2; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+              Voltar ao Menu Principal
+            </a>
+            <h2 style="position: relative; top:-15pt; text-align: center;">Cerveja</h2>
+          </div>
+
+          <div class="grid" style="overflow-y:auto">
+            <a class="griditem button menuitem" onclick="adicionarItem('Coral', 0.75)">
+              <img src="images/cerveja/coral.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Coral</p>
+                </div>
+                <div class="griditem_price">
+                  <p>
+                    0.75€
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Guinness', 1.25)">
+              <img src="images/cerveja/guinness.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Guinness</p>
+                </div>
+                <div class="griditem_price">
+                  <p>1.25€</p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Guinness XL', 2.25)">
+              <img src="images/cerveja/guinness.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Guinness XL</p>
+                </div>
+                <div class="griditem_price">
+                  <p>2.25€</p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Heineken', 1.37)">
+              <img src="images/cerveja/heineken.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Heineken</p>
+                </div>
+                <div class="griditem_price">
+                  <p>1.37€</p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Imperial', 1)">
+              <img src="images/cerveja/cerveja.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Imperial</p>
+                </div>
+                <div class="griditem_price">
+                  <p>1€</p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Sagres', 1.25)">
+              <img src="images/cerveja/sagres.jpg" class="item_picture" >
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Sagres</p>
+                </div>
+                <div class="griditem_price">
+                  <p>1.25€</p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Sagres Mini', 1)">
+              <img src="images/cerveja/sagres.jpg" class="item_picture" >
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Sagres Mini</p>
+                </div>
+                <div class="griditem_price">
+                  <p>1€</p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Super Bock', 1.25)">
+              <img src="images/cerveja/superbock.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Super Bock</p>
+                </div>
+                <div class="griditem_price">
+                  <p>1.25€</p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Super Bock s/ Álcool', 1.25)">
+              <img src="images/cerveja/superbock.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Super Bock s/ Álcool</p>
+                </div>
+                <div class="griditem_price">
+                  <p>1.25€</p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem button menuitem" onclick="adicionarItem('Super Bock Mini', 1)">
+              <img src="images/cerveja/superbock.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Super Bock Mini</p>
+                </div>
+                <div class="griditem_price">
+                  <p>1€</p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem_disabled"></a>
+            <a class="griditem_disabled"></a>
+          </div>
+        </div>
+
+        <!-- Secção chá -->
+        <div id="popupcha" class="overlay">
+          <div class="backbuttonspace">
+            <a class="btn btn-primary" href="#" style="position:fixed; z-index:2; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+              Voltar ao Menu Principal
+            </a>
+            <h2 style="position: relative; top:-15pt; text-align: center;">Chá</h2>
+          </div>
+
+          <div class="grid">
+            <a class="griditem button menuitem" onclick="adicionarItem('Chá vermelho', 3.34)">
+              <img src="images/cha/chavermelho.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Chá vermelho</p>
+                </div>
+                <div class="griditem_price">
+                  <p>
+                    3.34€
+                  </p>
+                </div>
+              </div>
+            </a>
+            <a class="griditem button menuitem" onclick="adicionarItem('Chá verde', 1.18)">
+              <img src="images/cha/chaverde.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Chá verde</p>
+                </div>
+                <div class="griditem_price">
+                  <p>
+                    1.18€
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <a class="griditem_disabled"></a>
+
+          </div>
+        </div>
+
+        <!-- Secção sumos -->
+        <div id="popupsumo" class="overlay">
+          <div class="backbuttonspace">
+            <a class="btn btn-primary" href="#" style="position:fixed; z-index:2; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+              Voltar ao Menu Principal
+            </a>
+            <h2 style="position: relative; top:-15pt; text-align: center;">Sumos e Refrigerantes</h2>
+          </div>
+
+          <div class="grid">
+            <a class="griditem button menuitem" onclick="adicionarItem('Coca Cola', 0.80)">
+              <img src="images/sumo/cocacola.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Coca Cola</p>
+                </div>
+                <div class="griditem_price">
+                  <p>
+                    0.80€
+                  </p>
+                </div>
+              </div>
+            </a>
+            <a class="griditem button menuitem" onclick="adicionarItem('Coca Cola Zero', 0.80)">
+              <img src="images/sumo/cocacola.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Coca Cola Zero</p>
+                </div>
+                <div class="griditem_price">
+                  <p>
+                    0.80€
+                  </p>
+                </div>
+              </div>
+            </a>
+            <div class="griditem_disabled">
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Secção sandes -->
+        <div id="popupsandes" class="overlay">
+          <div class="backbuttonspace">
+            <a class="btn btn-primary" href="#" style="position:fixed; z-index:2; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+              Voltar ao Menu Principal
+            </a>
+            <h2 style="position: relative; top:-15pt; text-align: center;">Sandes e Torradas</h2>
+          </div>
+
+          <div class="grid">
+            <a class="griditem button menuitem" onclick="adicionarItem('Sandes mista', 1.50)">
+              <img src="images/sandes/mista.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Sandes Mista</p>
+                </div>
+                <div class="griditem_price">
+                  <p>
+                    1.50€
+                  </p>
+                </div>
+              </div>
+            </a>
+            <a class="griditem button menuitem" onclick="adicionarItem('Sandes de Queijo', 1.50)">
+              <img src="images/sandes/queijo.png" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Sandes de Queijo</p>
+                </div>
+                <div class="griditem_price">
+                  <p>
+                    1.50€
+                  </p>
+                </div>
+              </div>
+            </a>
+            <a class="griditem button menuitem" onclick="adicionarItem('Tosta de Bacon', 3)">
+              <img src="images/sandes/sandwiches.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Tosta de Bacon</p>
+                </div>
+                <div class="griditem_price">
+                  <p>
+                    3€
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Secção Pastelaria -->
+        <div id="popuppastel" class="overlay">
+          <div class="backbuttonspace">
+            <a class="btn btn-primary" href="#" style="position:fixed; z-index:2; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+              Voltar ao Menu Principal
+            </a>
+            <h2 style="position: relative; top:-15pt; text-align: center;">Pastelaria</h2>
+          </div>
+
+          <div class="grid">
+            <a class="griditem button menuitem" onclick="adicionarItem('Pastel de Nata', 0.80)">
+              <img src="images/pastel/nata.jpg" class="item_picture">
+              <div class="centered_text">
+                <div class="griditem_name">
+                  <p>Pastel de Nata</p>
+                </div>
+                <div class="griditem_price">
+                  <p>
+                    0.80€
+                  </p>
+                </div>
+              </div>
+            </a>
+            <a class="griditem_disabled"></a>
+            <a class="griditem_disabled"></a>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Overlay do pedido -->
+      <div id="pedido_controlo">
+        <div id="pedido_controlo_janela">
+          <p id="pedido_controlo_nome">
+            Item
+          </p>
+          <p>
+            Escolha a quantidade pretendida:
+          </p>
+          <p id="pedido_controlo_quantidade">
+            1
+          </p>
+          <p>
+            Preço individual: <span id="pedido_controlo_preco">0</span>€
+          </p>
+          <p>
+            Preço total: <span id="pedido_controlo_preco_total">0</span>€
+          </p>
+          <div class="btn-group btn-group-justified">
+            <a type="button" class="btn btn-primary" onclick="aumentarQtd()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Aumentar</a>
+            <a type="button" class="btn btn-primary" onclick="reduzirQtd()"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Diminuir</a>
+          </div>
+          <p>
+          </p>
+          <div class="btn-group btn-group-justified">
+            <a type="button" class="btn btn-success" onclick="adicionarItem()">Confirmar</a>
+            <a type="button" class="btn btn-danger" onclick="closeNav('pedido_controlo')">Cancelar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overlay de mudar o pedido -->
+      <div id="pedido_controlo_mudar">
+        <div id="pedido_controlo_mudar_janela">
+          <p id="pedido_controlo_mudar_nome">
+            Item
+          </p>
+          <p>
+            Escolha a quantidade pretendida:
+          </p>
+          <p id="pedido_controlo_mudar_quantidade">
+            1
+          </p>
+          <p>
+            Preço individual: <span id="pedido_controlo_mudar_preco">0</span>€
+          </p>
+          <p>
+            Preço total: <span id="pedido_controlo_mudar_preco_total">0</span>€
+          </p>
+          <div class="btn-group btn-group-justified">
+            <a type="button" class="btn btn-primary" onclick="aumentarQtdMudar()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Aumentar</a>
+            <a type="button" class="btn btn-primary" onclick="reduzirQtdMudar()"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Diminuir</a>
+          </div>
+          <p>
+          </p>
+          <div class="btn-group btn-group-justified">
+            <a type="button" class="btn btn-success" onclick="mudarQtd()">Confirmar</a>
+            <a type="button" class="btn btn-danger" onclick="closeNav('pedido_controlo_mudar')">Cancelar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Popup no overlay de quantidade para confirmar a remoção de item -->
+      <div id="confirmar_remover">
+        <div id="confirmar_remover_janela">
+          <p id="confirmar_remover_nome">
+            Item
+          </p>
+          <p>
+
+          </p>
+          <p>
+            Tem a certeza que quer remover completamente este item da lista?
+          </p>
+          <p>
+
+          </p>
+          <div class="btn-group btn-group-justified">
+            <a type="button" class="btn btn-success" onclick="removerItem()">Sim</a>
+            <a type="button" class="btn btn-danger" onclick="closeNav('confirmar_remover')">Não</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Ajuda no pedido -->
+      <div id="ajuda_pedido" class="ajuda">
+        <div id="ajuda_pedido_janela" class="ajuda_janela" style=" width: 30%;">
+          <p id="ajuda_pedido_nome" class="ajuda_nome">
+            Ajuda no pedido
+          </p>
+          <p></p>
+          <b>Efetuar Pedido:</b> Escolha o que quiser pedir e, em seguida, carregue em 'Enviar Pedido'.
+          <p></p>
+          <b>Escolher Itens:</b> Para escolher algo que queira pedir, escolha uma categoria e em seguida selecione o item que desejar.
+          <p></p>
+          <b>Mudar Quantidade:</b> Para alterar a quantidade do item que quer pedir, selecione o seu nome na lista do pedido e ajuste a quantidade.
+          <p></p>
+          <b>Eliminar Item:</b> Carregue no ✖ correspondente ao item que já não quiser pedir.
+          <p></p>
+          <b>Limpar lista:</b> Para limpar a lista e começar de novo, carregue no botão amarelo 'Limpar Pedido'.
+          <p></p>
+          <b>Sair: </b> Para sair sem pedir nada, carregue no botão vermelho 'Cancelar e Sair'.
+          <p></p>
+          <a type="button" class="btn btn-danger btn-block" onclick="closeNav('ajuda_pedido')">Voltar</a>
+        </div>
+      </div>
+      <!-- Ajuda no pedido depois de pedir -->
+      <div id="ajuda_pedido_2" class="ajuda">
+        <div id="ajuda_pedido_2_janela" class="ajuda_janela" style=" width: 30%;">
+          <p id="ajuda_pedido_2_nome" class="ajuda_nome">
+            Ajuda no pedido
+          </p>
+          <p></p>
+          <b>Sair: </b> Para sair, efetue o pagamento.
+          <p></p>
+          <b>Pagar:</b> Para pagar, carregue no botão 'Pagamento'.
+          <p></p>
+          <b>Efetuar Pedido Novamente:</b> Escolha o que quiser pedir e, em seguida, carregue em 'Enviar Novo Pedido'.
+          <p></p>
+          <b>Escolher Itens:</b> Para escolher algo que queira pedir, escolha uma categoria e em seguida selecione o item que desejar.
+          <p></p>
+          <b>Mudar Quantidade:</b> Para alterar a quantidade do item que quer pedir, selecione o seu nome na lista do pedido e ajuste a quantidade.
+          <p></p>
+          <b>Eliminar Item:</b> Carregue no ✖ correspondente ao item que já não quiser pedir.
+          <p></p>
+          <b>Limpar lista:</b> Para limpar a lista e começar de novo, carregue no botão amarelo 'Limpar Pedido'.
+          <p></p>
+          <a type="button" class="btn btn-danger btn-block" onclick="closeNav('ajuda_pedido_2')">Voltar</a>
+        </div>
+      </div>
+      <!-- Ajuda na escolha do tipo de pagamento -->
+      <div id="ajuda_pagamento" class="ajuda">
+        <div id="ajuda_pagamento_janela" class="ajuda_janela" style=" width: 25%;">
+          <p id="ajuda_pagamento_nome" class="ajuda_nome">
+            Ajuda no pagamento
+          </p>
+          <p></p>
+          <b>Dinheiro:</b> Insira notas ou moedas de Euro na ranhura correspondente à sua frente.
+          <p></p>
+          <b>Cartão multibanco:</b> Insira o seu cartão na ranhura correspondente e carregue OK.
+          <p></p>
+          <b>NFC:</b> Use o seu telemóvel para efetuar o pagamento.
+          <p></p>
+          <span class="glyphicon glyphicon-exclamation-sign"></span><b> Atenção:</b> O seu telemóvel precisa de estar configurado para poder pagar por NFC. Se o seu telemóvel não suporta ou não está configurado para este tipo de pagamento, por favor use um dos outros dois métodos de pagamento.
+          <p></p>
+          <a type="button" class="btn btn-danger btn-block" onclick="closeNav('ajuda_pagamento')">Voltar</a>
+        </div>
+      </div>
+      <!-- Ajuda a escolher por quem pagar -->
+      <div id="ajuda_pagamento_2" class="ajuda">
+        <div id="ajuda_pagamento_2_janela" class="ajuda_janela" style=" width: 25%;">
+          <p id="ajuda_pagamento_2_nome" class="ajuda_nome">
+            Ajuda no pagamento
+          </p>
+          <p></p>
+          <b>Pagar a minha conta:</b> Paga apenas o que pediu.
+          <p></p>
+          <b>Dividir por todos:</b> Divida a conta igualmente por todos os clientes na mesa.
+          <p></p>
+          <b>Pagar por todos:</b> Paga a conta de todos os clientes da mesa.
+          <p></p>
+          <a type="button" class="btn btn-danger btn-block" onclick="closeNav('ajuda_pagamento_2')">Voltar</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
